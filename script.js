@@ -2,7 +2,7 @@ const CIRCLE_CIRCUMFERENCE = 553; // 2 * PI * r(88)
 
 // DOM Elements
 const breathTimeSelect = document.getElementById('breath-time');
-const breathCountSelect = document.getElementById('breath-count');
+const totalTimeSelect = document.getElementById('total-time');
 const settingsPanel = document.getElementById('settings-panel');
 const startButton = document.getElementById('start-button');
 const readingText = document.getElementById('reading-text');
@@ -11,8 +11,7 @@ const progressCircle = document.querySelector('.progress-ring__circle');
 
 // App State
 let breathTime = 4;
-let breathCount = 3;
-let currentCount = 0;
+let totalTime = 60;
 let voices = [];
 let isPlaying = false;
 let timeoutIds = [];
@@ -117,11 +116,18 @@ async function runCountdown() {
 }
 
 async function runBreathingCycle() {
-    for (currentCount = 1; currentCount <= breathCount; currentCount++) {
+    const startTime = Date.now();
+
+    while (isPlaying) {
+        const elapsedTime = (Date.now() - startTime) / 1000;
+        if (elapsedTime >= totalTime) {
+            break;
+        }
+
         if (!isPlaying) return;
 
         // Inhale
-        setReadingText(`すってー (${currentCount}/${breathCount})`);
+        setReadingText(`すってー`);
         speak("すってー", 0.8);
 
         // Reset progress and animate to full
@@ -138,7 +144,7 @@ async function runBreathingCycle() {
         if (!isPlaying) return;
 
         // Exhale
-        setReadingText(`はいてー (${currentCount}/${breathCount})`);
+        setReadingText(`はいてー`);
         speak("はいてー", 0.8);
 
         // Animate from full to empty
@@ -177,7 +183,7 @@ async function startTraining() {
 
     isPlaying = true;
     breathTime = parseInt(breathTimeSelect.value, 10);
-    breathCount = parseInt(breathCountSelect.value, 10);
+    totalTime = parseInt(totalTimeSelect.value, 10);
 
     // Update UI
     settingsPanel.classList.add('hidden');
