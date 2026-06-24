@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>呼吸トレーニング</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <h1 class="title">こきゅうトレーニング</h1>
+
+        <div class="settings-panel" id="settings-panel">
+            <div class="setting-item">
+                <label for="breath-time">1回あたり</label>
+                <select id="breath-time">
+                    <option value="4" selected>4びょう</option>
+                    <option value="5">5びょう</option>
+                    <option value="6">6びょう</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label for="breath-count">かいすう</label>
+                <select id="breath-count">
+                    <option value="3" selected>3かい</option>
+                    <option value="5">5かい</option>
+                    <option value="10">10かい</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="timer-container">
+            <svg class="progress-ring" width="200" height="200" viewBox="0 0 200 200">
+                <circle class="progress-ring__track" cx="100" cy="100" r="88" fill="transparent" stroke-width="16"></circle>
+                <circle class="progress-ring__circle" cx="100" cy="100" r="88" fill="transparent" stroke-width="16"></circle>
+            </svg>
+            <div class="timer-text" id="timer-text"></div>
+        </div>
+
+        <div class="reading-text-container">
+            <p class="reading-text" id="reading-text">じゅんびはいいかな？</p>
+        </div>
+
+        <div class="button-container">
+            <button id="start-button" class="start-button">スタート！</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

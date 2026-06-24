@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #FFF0F5;          /* ラベンダーブラッシュ（淡いピンク） */
+    --main-color: #FFB7C5;        /* チェリーブロッサムピンク */
+    --sub-color: #C8A2C8;         /* ライラック */
+    --accent-color: #FFD1DC;      /* パステルピンク */
+    --text-main: #5C3D5E;         /* ダークプラム */
+    --text-sub: #9B7FA6;          /* ミディアムパープル */
+    --progress-track: #F0D6E8;    /* 薄いピンク */
+    --progress-fill: #C8A2C8;     /* ライラック */
+    --button-bg: #FFB7C5;         /* メインカラーと統一 */
+    --button-text: #FFFFFF;       /* 白 */
+    --font-family: 'Hiragino Maru Gothic ProN', 'M PLUS Rounded 1c', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-family);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* スクロールなし */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    max-width: 500px; /* スマホサイズ最大幅 */
+    padding: 20px;
+    text-align: center;
+}
+
+.title {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    color: var(--text-main);
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.settings-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 15px 25px;
+    box-shadow: 0 4px 15px rgba(200, 162, 200, 0.2);
+    display: flex;
+    gap: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.settings-panel.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.setting-item label {
+    font-size: 1rem;
+    color: var(--text-sub);
+    font-weight: 700;
+}
+
+.setting-item select {
+    appearance: none;
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 15px;
+    padding: 8px 15px;
+    font-size: 1.1rem;
+    color: var(--text-main);
+    font-family: var(--font-family);
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.timer-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.progress-ring {
+    transform: rotate(-90deg); /* 12時の位置からスタート */
+}
+
+.progress-ring__track {
+    stroke: var(--progress-track);
+}
+
+.progress-ring__circle {
+    stroke: var(--progress-fill);
+    stroke-dasharray: 553; /* 2 * PI * r(88) = 552.92 */
+    stroke-dashoffset: 553;
+    transition: stroke-dashoffset linear;
+    stroke-linecap: round;
+}
+
+.timer-text {
+    position: absolute;
+    font-size: clamp(3rem, 15vw, 6rem);
+    font-weight: 700;
+    color: var(--text-main);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.timer-text.pop {
+    transform: scale(1.2);
+}
+
+.reading-text-container {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reading-text {
+    font-size: clamp(1.4rem, 6vw, 2.2rem);
+    font-weight: 700;
+    color: var(--text-main);
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.reading-text.fade-out {
+    opacity: 0;
+}
+
+.button-container {
+    margin-bottom: 20px;
+}
+
+.start-button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 50px;
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    font-family: var(--font-family);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(200, 162, 200, 0.4);
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.start-button:active:not(:disabled) {
+    transform: scale(0.97);
+    box-shadow: 0 2px 10px rgba(200, 162, 200, 0.4);
+}
+
+.start-button:disabled {
+    background-color: #E0E0E0;
+    color: #999;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
